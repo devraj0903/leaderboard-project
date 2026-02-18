@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Leaderboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class = "wrapper">
+    <h1>Game Leaderboard</h1>
+
+    <form method="post" action="/submit">
+        <input type="text" name="name" placeholder="UserName" required>
+        <input type="number" name="score" placeholder="Score" required>
+        <button type="submit">Submit Score</button>
+    </form>
+
+    <form method="get" action="/">
+    <label for="n">Show Top N Players:</label>
+    <input type="number" name="n" value="{{ n }}" min="1" style="width:80px; margin:5px;">
+    <button type="submit">Show</button>
+    </form>
+
+    <div id="leaderboard">
+        <h2>Top {{ n }} Players</h2>
+        <table>
+            <tr><th>Rank</th><th>Name</th><th>Score</th></tr>
+            {% for row in rows %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+  </div>
+</body>
+</html>
